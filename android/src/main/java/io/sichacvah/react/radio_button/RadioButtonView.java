@@ -1,30 +1,30 @@
 package io.sichacvah.react.radio_button;
 
-
 import android.content.Context;
-import android.support.v7.widget.AppCompatRadioButton;
 
-public class RadioButtonView extends AppCompatRadioButton {
-  private boolean mAllowChange;
+import com.google.android.material.radiobutton.MaterialRadioButton;
 
-  public RadioButtonView(Context context) {
-    super(context);
-    mAllowChange = true;
-  }
+class ReactCheckBox extends MaterialRadioButton {
 
-  @Override
-  public void setChecked(boolean checked) {
-    if (mAllowChange) {
-      mAllowChange = false;
-      super.setChecked(checked);
+    private boolean mAllowChange;
+
+    public ReactCheckBox(Context context) {
+        super(context);
+        mAllowChange = true;
     }
-  }
 
-
-  void setOn(boolean on) {
-    if (isChecked() != on) {
-      super.setChecked(on);
+    @Override
+    public void setChecked(boolean checked) {
+        if (mAllowChange) {
+            mAllowChange = false;
+            super.setChecked(checked);
+        }
     }
-    mAllowChange = true;
-  }
+
+    void setCheckedSave(boolean on) {
+        if (isChecked() != on) {
+            super.setChecked(on);
+        }
+        mAllowChange = true;
+    }
 }

@@ -8,39 +8,38 @@ import com.facebook.react.uimanager.events.RCTEventEmitter;
 
 class RadioButtonEvent extends Event<RadioButtonEvent> {
 
-  public static final String EVENT_NAME = "topChange";
+    public static final String EVENT_NAME = "radioButtonChange";
 
-  private final boolean mIsChecked;
+    private final boolean mIsChecked;
 
-  public RadioButtonEvent(int viewId, long timestampMs, boolean isChecked) {
-    super();
-    init(viewId);
-    mIsChecked = isChecked;
-  }
+    public RadioButtonEvent(int viewId, long timestampMs, boolean isChecked) {
+        super(viewId, timestampMs);
+        mIsChecked = isChecked;
+    }
 
-  public boolean getIsChecked() {
-    return mIsChecked;
-  }
+    public boolean getIsChecked() {
+        return mIsChecked;
+    }
 
-  @Override
-  public String getEventName() {
-    return EVENT_NAME;
-  }
+    @Override
+    public String getEventName() {
+        return EVENT_NAME;
+    }
 
-  @Override
-  public short getCoalescingKey() {
-    return 0;
-  }
+    @Override
+    public short getCoalescingKey() {
+        return 0;
+    }
 
-  @Override
-  public void dispatch(RCTEventEmitter rctEventEmitter) {
-    rctEventEmitter.receiveEvent(getViewTag(), getEventName(), serializeEventData());
-  }
+    @Override
+    public void dispatch(RCTEventEmitter rctEventEmitter) {
+        rctEventEmitter.receiveEvent(getViewTag(), getEventName(), serializeEventData());
+    }
 
-  private WritableMap serializeEventData() {
-    WritableMap eventData = Arguments.createMap();
-    eventData.putInt("target", getViewTag());
-    eventData.putBoolean("value", getIsChecked());
-    return eventData;
-  }
+    private WritableMap serializeEventData() {
+        WritableMap eventData = Arguments.createMap();
+        eventData.putInt("target", getViewTag());
+        eventData.putBoolean("value", getIsChecked());
+        return eventData;
+    }
 }
